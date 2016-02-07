@@ -1,0 +1,14 @@
+.plane table {
+  border-collapse: collapse;
+}
+.plane td {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+}
+.plane td.alive {
+  background-color: black;
+}
+.plane td.dead {
+  background-color: white;
+}

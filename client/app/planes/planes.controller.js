@@ -23,4 +23,14 @@ angular.module('gameOfLifeJavascriptApp')
       { x: 2, y: 3 },
       { x: 2, y: 4 }
     ];
+    $scope.plane.alive = function(x, y) {
+      // TODO: use a map for O(1) search
+      for (var c in $scope.plane.aliveCells) {
+        var cell = $scope.plane.aliveCells[c];
+        if (cell.x == x && cell.y == y) {
+          return true;
+        }
+      }
+      return false;
+    };
   });
