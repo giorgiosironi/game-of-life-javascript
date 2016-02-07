@@ -1,4 +1,3 @@
-- introduce a template for the plane and populate it statically
 - populate the template with $http
 - make the web service calculate different generations
 - allow to go back and forth between generations of a plane with buttons
