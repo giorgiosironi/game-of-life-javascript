@@ -3,8 +3,8 @@
 angular.module('gameOfLifeJavascriptApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/planes', {
-        templateUrl: 'app/planes/planes.html',
+      .when('/planes/:name', {
+        templateUrl: 'app/planes/plane.html',
         controller: 'PlanesCtrl'
       });
   });
