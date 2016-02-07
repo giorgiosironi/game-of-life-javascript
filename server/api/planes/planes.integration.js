@@ -5,21 +5,16 @@ import request from 'supertest';
 
 describe('Planes API:', function() {
 
-  describe('GET /api/planes/:id', function() {
-    var plane;
-
+  describe('GET /api/planes/:name', function() {
     it('should contain a list of alive cells', function() {
       request(app)
         .get('/api/planes/a-block-and-bar')
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if (err) {
-            return done(err);
-          }
-          plane = res.body;
+          console.log("getting here? 1");
+          var plane = res.body;
           plane.aliveCells.length.should.equal(3);
-          done();
         });
     });
 
@@ -29,15 +24,10 @@ describe('Planes API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if (err) {
-            return done(err);
-          }
-          plane = res.body;
-          plane.aliveCells.length.should.equal(3);
-          done();
+          console.log("getting here? 2");
+          res.status.should.equal(200);
         });
     });
-
   });
 
 });
