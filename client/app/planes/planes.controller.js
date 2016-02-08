@@ -14,6 +14,12 @@ angular.module('gameOfLifeJavascriptApp')
     $scope.name = $routeParams.name;
     $scope.knobs = {};
     $scope.knobs.generationIndex = 0;
+    $scope.knobs.decreaseGeneration = function() {
+      $scope.knobs.generationIndex--;
+    };
+    $scope.knobs.increaseGeneration = function() {
+      $scope.knobs.generationIndex++;
+    };
     $scope.knobs.update = function() {
       planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
         $scope.plane = response.data;
@@ -35,4 +41,5 @@ angular.module('gameOfLifeJavascriptApp')
       });
     };
     $scope.knobs.update();
+    $scope.$watch('knobs.generationIndex', $scope.knobs.update);
   });
