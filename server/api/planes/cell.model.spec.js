@@ -14,4 +14,15 @@ describe('Cell', function() {
       origin.manhattanDistance(neighbor).should.be.most(2);
     }
   });
+
+  it('should generate the zone of potentially alive cells for the next generation', function() {
+    var origin = Cell.fromXAndY(0, 0);
+    var neighbors = origin.zone();
+    neighbors.size.should.equal(9);
+    for (var i in neighbors) {
+      var neighbor = neighbors[i];
+      origin.manhattanDistance(neighbor).should.be.least(0);
+      origin.manhattanDistance(neighbor).should.be.most(2);
+    }
+  });
 });

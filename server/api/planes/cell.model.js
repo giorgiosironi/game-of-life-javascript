@@ -21,6 +21,11 @@ Cell.prototype.neighbors = function() {
     Cell.fromXAndY(this.x, this.y-1),
   ]);
 };
+Cell.prototype.zone = function() {
+  var zone = this.neighbors();
+  zone.add(this);
+  return zone;
+};
 Cell.prototype.manhattanDistance = function(anotherCell) {
   return Math.abs(this.x - anotherCell.x) + Math.abs(this.y - anotherCell.y);
 };
