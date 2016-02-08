@@ -8,5 +8,10 @@ describe('Cell', function() {
     var origin = Cell.fromXAndY(0, 0);
     var neighbors = origin.neighbors();
     neighbors.length.should.equal(8);
+    for (var i in neighbors) {
+      var neighbor = neighbors[i];
+      origin.manhattanDistance(neighbor).should.be.least(1);
+      origin.manhattanDistance(neighbor).should.be.most(2);
+    }
   });
 });

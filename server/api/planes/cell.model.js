@@ -10,15 +10,19 @@ Cell.fromXAndY = function(x, y) {
 };
 Cell.prototype.neighbors = function() {
   return [
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
-    Cell.fromXAndY(this.x, this.y),
+    // TODO: remove duplication
+    Cell.fromXAndY(this.x-1, this.y-1),
+    Cell.fromXAndY(this.x-1, this.y),
+    Cell.fromXAndY(this.x-1, this.y+1),
+    Cell.fromXAndY(this.x, this.y+1),
+    Cell.fromXAndY(this.x+1, this.y+1),
+    Cell.fromXAndY(this.x+1, this.y),
+    Cell.fromXAndY(this.x+1, this.y-1),
+    Cell.fromXAndY(this.x, this.y-1),
   ];
+};
+Cell.prototype.manhattanDistance = function(anotherCell) {
+  return Math.abs(this.x - anotherCell.x) + Math.abs(this.y - anotherCell.y);
 };
 
 export default Cell;
