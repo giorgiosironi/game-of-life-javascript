@@ -13,6 +13,17 @@ Cell.fromXAndY = function(x, y) {
   }
   return instances.get(signature);
 };
+// static method
+Cell.comparator = function(former, latter) {
+  if (former.signature() < latter.signature()) {
+    return -1;
+  }
+  if (former.signature() > latter.signature()) {
+    return 1;
+  }
+  return 0;
+};
+// instance methods
 Cell.prototype.signature = function() {
   return this.x + ";" + this.y;
 };

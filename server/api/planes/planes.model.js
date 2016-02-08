@@ -3,29 +3,28 @@
 var Cell = require('./cell.model');
 var Rules = require('./rules.model');
 
+/**
+ * aliveCells can be a Set or Array of Cell instances
+ */
 var Generation = function(aliveCells) {
-  // TODO: accept both Array and Set in input
-  aliveCells.sort(function(former, latter) {
-    if (former.signature() < latter.signature()) {
-      return -1;
-    }
-    if (former.signature() > latter.signature()) {
-      return 1;
-    }
-    return 0;
-  });
+  if (aliveCells.constructor === Set) {
+    aliveCells = Array.from(aliveCells);
+  }
+  aliveCells.sort(Cell.comparator);
   this.aliveCells = new Set(aliveCells);
 };
 Generation.prototype.evolve = function() {
-  var candidates = new Set();
-  for (var cell of this.aliveCells.values()) {
-    var zone = cell.zone();
-    for (var each of zone.values()) {
-      candidates.add(each);
+  var candidates = () => {
+    var cells = new Set();
+    for (var cell of this.aliveCells.values()) {
+      var zone = cell.zone();
+      for (var each of zone.values()) {
+        cells.add(each);
+      }
     }
-  }
-  var nextGeneration = new Set();
-  for (var cell of candidates.values()) {
+    return cells;
+  };
+  var nextState = (cell) => {
     var isAlive = this.aliveCells.has(cell);
     var aliveNeighbors = 0;
     for (var neighbor of cell.neighbors().values()) {
@@ -33,12 +32,15 @@ Generation.prototype.evolve = function() {
         aliveNeighbors++;
       }
     }
-    var nextState = Rules.nextState(isAlive, aliveNeighbors);
-    if (nextState) {
+    return Rules.nextState(isAlive, aliveNeighbors);
+  };
+  var nextGeneration = new Set();
+  for (var cell of candidates().values()) {
+    if (nextState(cell)) {
       nextGeneration.add(cell);
     }
   }
-  return new Generation(Array.from(nextGeneration));
+  return new Generation(nextGeneration);
 };
 
 var horizontalBar = new Generation([
