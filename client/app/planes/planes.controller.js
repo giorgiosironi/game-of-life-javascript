@@ -12,22 +12,27 @@ angular.module('gameOfLifeJavascriptApp')
 
     $scope.message = 'Hello';
     $scope.name = $routeParams.name;
-    planesRepository.findByName($scope.name).then(function(response) {
-      $scope.plane = response.data;
-      $scope.plane.size = {};
-      $scope.plane.size.x = {};
-      $scope.plane.size.x.range = range(0, 10);
-      $scope.plane.size.y = {};
-      $scope.plane.size.y.range = range(0, 10);
-      $scope.plane.alive = function(x, y) {
-        // TODO: use a map for O(1) search
-        for (var c in $scope.plane.aliveCells) {
-          var cell = $scope.plane.aliveCells[c];
-          if (cell.x === x && cell.y === y) {
-            return true;
+    $scope.knobs = {};
+    $scope.knobs.generationIndex = 0;
+    $scope.knobs.update = function() {
+      planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
+        $scope.plane = response.data;
+        $scope.plane.size = {};
+        $scope.plane.size.x = {};
+        $scope.plane.size.x.range = range(0, 10);
+        $scope.plane.size.y = {};
+        $scope.plane.size.y.range = range(0, 10);
+        $scope.plane.alive = function(x, y) {
+          // TODO: use a map for O(1) search
+          for (var c in $scope.plane.aliveCells) {
+            var cell = $scope.plane.aliveCells[c];
+            if (cell.x === x && cell.y === y) {
+              return true;
+            }
           }
-        }
-        return false;
-      };
-    });
+          return false;
+        };
+      });
+    };
+    $scope.knobs.update();
   });

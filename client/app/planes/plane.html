@@ -1,5 +1,7 @@
 <h1>Plane: {{ name }}</h1>
 <div>This is the planes view.</div>
+<input ng-model="knobs.generationIndex" />
+<input type="submit" ng-click="knobs.update()" />
 <table class="plane">
   <tr ng-repeat="x in plane.size.x.range">
     <td
