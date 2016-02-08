@@ -31,7 +31,7 @@ function handleError(res, statusCode) {
 
 export function show(req, res) {
   var name = req.params.name;
-  var generationIndex = (typeof req.params.index == "undefined") ? 0 : req.params.index;
+  var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;
   var plane = Planes.findByName(name, generationIndex);
   respondWithResult(res, 200)(plane);
   /*

@@ -23,7 +23,7 @@ angular.module('gameOfLifeJavascriptApp')
         // TODO: use a map for O(1) search
         for (var c in $scope.plane.aliveCells) {
           var cell = $scope.plane.aliveCells[c];
-          if (cell.x == x && cell.y == y) {
+          if (cell.x === x && cell.y === y) {
             return true;
           }
         }
