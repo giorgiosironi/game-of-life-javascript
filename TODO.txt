@@ -1,4 +1,6 @@
 - e2e tests for moving between generations
+- populate correctly the a-block-and-bar plane
+- add some more planes, and list them dynamically with an API
 - tests with Karma for service and controller
 - Extract Class: Knobs
 - can we use a directive somewhere?
