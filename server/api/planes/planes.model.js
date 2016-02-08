@@ -1,7 +1,7 @@
 'use strict';
 
 var Planes = {
-  findByName: function(name) {
+  findByName: function(name, generationIndex) {
     return { aliveCells: [ {x: 2, y: 2}, {x: 2, y: 3}, {x: 2, y: 4} ] };
   }
 };

@@ -1,2 +1,4 @@
-- make the web service calculate different generations
+- make the web service calculate different generations by evolving it on the fly
 - allow to go back and forth between generations of a plane with buttons
+- cache in memory the generations
+- cache in the db the generations
