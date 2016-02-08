@@ -9,7 +9,7 @@ Cell.fromXAndY = function(x, y) {
   return new Cell(x, y);
 };
 Cell.prototype.neighbors = function() {
-  return [
+  return new Set([
     // TODO: remove duplication
     Cell.fromXAndY(this.x-1, this.y-1),
     Cell.fromXAndY(this.x-1, this.y),
@@ -19,7 +19,7 @@ Cell.prototype.neighbors = function() {
     Cell.fromXAndY(this.x+1, this.y),
     Cell.fromXAndY(this.x+1, this.y-1),
     Cell.fromXAndY(this.x, this.y-1),
-  ];
+  ]);
 };
 Cell.prototype.manhattanDistance = function(anotherCell) {
   return Math.abs(this.x - anotherCell.x) + Math.abs(this.y - anotherCell.y);
