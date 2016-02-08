@@ -1,4 +1,9 @@
 - e2e tests for moving between generations
+- tests with Karma for service and controller
+- Extract Class: Knobs
+- can we use a directive somewhere?
+- can we add more checks to jshint?
+- explore the Grunt build to see if we're missing something
 - permalink someway in the URL?
 - cache in memory the generations
 - cache in the db the generations
