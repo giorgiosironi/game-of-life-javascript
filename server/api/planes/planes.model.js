@@ -1,13 +1,6 @@
 'use strict';
 
-var Cell = function(x, y) {
-  this.x = x;
-  this.y = y;
-};
-// Factory Method
-Cell.fromXAndY = function(x, y) {
-  return new Cell(x, y);
-};
+var Cell = require('./cell.model');
 
 var Generation = function(aliveCells) {
   this.aliveCells = aliveCells;
