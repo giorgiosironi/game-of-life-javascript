@@ -4,9 +4,17 @@ var Cell = function(x, y) {
   this.x = x;
   this.y = y;
 };
-// Factory Method
+var instances = new Map();
+// Factory Method, Flyweight in order to be able to use Cells in Sets
 Cell.fromXAndY = function(x, y) {
-  return new Cell(x, y);
+  var signature = x + ";" + y;
+  if (!instances.has(signature)) {
+    instances.set(signature, new Cell(x, y));
+  }
+  return instances.get(signature);
+};
+Cell.prototype.signature = function() {
+  return this.x + ";" + this.y;
 };
 Cell.prototype.neighbors = function() {
   return new Set([
