@@ -40,6 +40,8 @@ angular.module('gameOfLifeJavascriptApp')
         };
       });
     };
-    $scope.knobs.update();
+    // not necessary, it seems, because the knobs.generationIndex initialization
+    // is already triggering at the end of the creation of this controller
+    //$scope.knobs.update();
     $scope.$watch('knobs.generationIndex', $scope.knobs.update);
   });

@@ -3,9 +3,10 @@
 - add some more planes, and list them dynamically with an API
 - tests with Karma for service and controller
 - Extract Class: Knobs
-- can we use a directive somewhere?
+- can we use a directive somewhere? yes, for the cells
 - can we add more checks to jshint?
 - explore the Grunt build to see if we're missing something
 - permalink someway in the URL?
 - cache in memory the generations
 - cache in the db the generations
+- evaluate https://github.com/angular-ui/ui-router
