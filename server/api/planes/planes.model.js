@@ -61,7 +61,11 @@ var Planes = {
     return horizontalBar;
   },
   findByName: function(name, generationIndex) {
-    return verticalBar;
+    var generation = verticalBar;
+    for (var i = 1; i <= generationIndex; i++) {
+      generation = generation.evolve();
+    }
+    return generation;
   }
 };
 

@@ -12,10 +12,9 @@ describe('Planes API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          console.log("getting here? 1");
           var plane = res.body;
           plane.aliveCells.length.should.equal(3);
-          done();
+          done(err);
         });
     });
 
@@ -25,9 +24,9 @@ describe('Planes API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          console.log("getting here? 2");
-          res.status.should.equal(200);
-          done();
+          var plane = res.body;
+          plane.aliveCells.length.should.equal(3);
+          done(err);
         });
     });
   });
