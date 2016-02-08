@@ -16,9 +16,9 @@ var Generation = function(aliveCells) {
 Generation.prototype.evolve = function() {
   var candidates = () => {
     var cells = new Set();
-    for (var cell of this.aliveCells.values()) {
+    for (let cell of this.aliveCells) {
       var zone = cell.zone();
-      for (var each of zone.values()) {
+      for (let each of zone) {
         cells.add(each);
       }
     }
@@ -27,7 +27,7 @@ Generation.prototype.evolve = function() {
   var nextState = (cell) => {
     var isAlive = this.aliveCells.has(cell);
     var aliveNeighbors = 0;
-    for (var neighbor of cell.neighbors().values()) {
+    for (let neighbor of cell.neighbors()) {
       if (this.aliveCells.has(neighbor)) {
         aliveNeighbors++;
       }
@@ -35,7 +35,7 @@ Generation.prototype.evolve = function() {
     return Rules.nextState(isAlive, aliveNeighbors);
   };
   var nextGeneration = new Set();
-  for (var cell of candidates().values()) {
+  for (let cell of candidates()) {
     if (nextState(cell)) {
       nextGeneration.add(cell);
     }
