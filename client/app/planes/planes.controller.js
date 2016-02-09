@@ -4,7 +4,7 @@ angular.module('gameOfLifeJavascriptApp')
   .controller('PlanesCtrl', function($scope, $routeParams, planesRepository, knobs) {
     var range = function(start, length) {
       var result = [];
-      for (var i = start; i < start + length; i++) {
+      for (let i = start; i < start + length; i++) {
         result.push(i);
       }
       return result;
@@ -25,7 +25,7 @@ angular.module('gameOfLifeJavascriptApp')
         $scope.plane.size.y.range = range(0, 10);
         $scope.plane.alive = function(x, y) {
           // TODO: use a map for O(1) search
-          for (var c in $scope.plane.aliveCells) {
+          for (let c in $scope.plane.aliveCells) {
             var cell = $scope.plane.aliveCells[c];
             if (cell.x === x && cell.y === y) {
               return true;

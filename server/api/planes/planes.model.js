@@ -106,7 +106,7 @@ var Planes = {
   },
   findByName: function(name, generationIndex) {
     var generation = all[name];
-    for (var i = 1; i <= generationIndex; i++) {
+    for (let i = 1; i <= generationIndex; i++) {
       generation = generation.evolve();
     }
     return generation;
