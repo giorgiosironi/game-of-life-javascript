@@ -2,8 +2,10 @@
 - populate correctly the a-block-and-bar plane
 - add some more planes, and list them dynamically with an API
 - tests with Karma for service and controller
-- Extract Class: Knobs
-- can we use a directive somewhere? yes, for the cells
+- Extract Class: Knobs,
+- can we use a directive somewhere? yes, for the cells and for the knobs
+-- with its own template
+-- knobs should have an isolated scope by default, but which binds bidirectionally to expose generationIndex
 - can we add more checks to jshint?
 - explore the Grunt build to see if we're missing something
 - permalink someway in the URL?
