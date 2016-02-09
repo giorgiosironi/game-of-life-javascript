@@ -10,7 +10,6 @@ angular.module('gameOfLifeJavascriptApp')
       return result;
     };
 
-    $scope.message = 'Hello';
     $scope.name = $routeParams.name;
     $scope.knobs = knobs;
     let updateGeneration = function() {
@@ -31,7 +30,10 @@ angular.module('gameOfLifeJavascriptApp')
           }
           return false;
         };
+      }, function(err) {
+        console.error(err);
       });
     };
+    $scope.updateGeneration = updateGeneration;
     $scope.$watch('knobs.generationIndex', updateGeneration);
   });

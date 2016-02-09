@@ -2,20 +2,35 @@
 
 describe('Controller: PlanesCtrl', function () {
 
-  // load the controller's module
   beforeEach(module('gameOfLifeJavascriptApp'));
 
-  var PlanesCtrl, scope;
+  var $rootScope, PlanesCtrl, $scope, $routeParams, planesRepository;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
+  beforeEach(inject(function ($controller, _$rootScope_, _$routeParams_, $q) {
+    $rootScope = _$rootScope_;
+    $scope = $rootScope.$new();
+    planesRepository = {
+      findByName: function() {
+        return $q(function(resolve, reject) {
+          resolve({
+            data: {
+              aliveCells: [{x: 0, y: 1}]
+            }
+          });
+        });
+      }
+    };
     PlanesCtrl = $controller('PlanesCtrl', {
-      $scope: scope
+      $scope: $scope,
+      $routeParams: _$routeParams_,
+      planesRepository: planesRepository
     });
   }));
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
+  it('should load generation 0 for the requested plane', function () {
+    expect($scope.knobs.generationIndex).toBe(0);
+    $scope.updateGeneration();
+    $rootScope.$apply();
+    expect($scope.plane.aliveCells.length).toBe(1);
   });
 });
