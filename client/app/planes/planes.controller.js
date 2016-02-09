@@ -13,8 +13,7 @@ angular.module('gameOfLifeJavascriptApp')
     $scope.message = 'Hello';
     $scope.name = $routeParams.name;
     $scope.knobs = knobs;
-    // TODO: try let to see Babel at work?
-    var updateGeneration = function() {
+    let updateGeneration = function() {
       planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
         $scope.plane = response.data;
         $scope.plane.size = {};
