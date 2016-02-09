@@ -1,5 +1,15 @@
 'use strict';
 
+var Knobs = function(generationIndex) {
+  this.generationIndex = generationIndex;
+};
+Knobs.prototype.decreaseGeneration = function() {
+  this.generationIndex--;
+};
+Knobs.prototype.increaseGeneration = function() {
+  this.generationIndex++;
+};
+
 angular.module('gameOfLifeJavascriptApp')
   .controller('PlanesCtrl', function ($scope, $routeParams, planesRepository) {
     var range = function(start, length) {
@@ -12,15 +22,9 @@ angular.module('gameOfLifeJavascriptApp')
 
     $scope.message = 'Hello';
     $scope.name = $routeParams.name;
-    $scope.knobs = {};
-    $scope.knobs.generationIndex = 0;
-    $scope.knobs.decreaseGeneration = function() {
-      $scope.knobs.generationIndex--;
-    };
-    $scope.knobs.increaseGeneration = function() {
-      $scope.knobs.generationIndex++;
-    };
-    $scope.knobs.update = function() {
+    $scope.knobs = new Knobs(0);
+    // TODO: try let to see Babel at work?
+    var updateGeneration = function() {
       planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
         $scope.plane = response.data;
         $scope.plane.size = {};
@@ -40,8 +44,5 @@ angular.module('gameOfLifeJavascriptApp')
         };
       });
     };
-    // not necessary, it seems, because the knobs.generationIndex initialization
-    // is already triggering at the end of the creation of this controller
-    //$scope.knobs.update();
-    $scope.$watch('knobs.generationIndex', $scope.knobs.update);
+    $scope.$watch('knobs.generationIndex', updateGeneration);
   });
