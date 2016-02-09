@@ -4,14 +4,14 @@ describe('Controller: PlanesCtrl', function () {
 
   beforeEach(module('gameOfLifeJavascriptApp'));
 
-  var $rootScope, PlanesCtrl, $scope, $routeParams, planesRepository;
+  var $rootScope, PlanesCtrl, $scope, planesRepository;
 
   beforeEach(inject(function ($controller, _$rootScope_, _$routeParams_, $q) {
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
     planesRepository = {
       findByName: function() {
-        return $q(function(resolve, reject) {
+        return $q(function(resolve) {
           resolve({
             data: {
               aliveCells: [{x: 0, y: 1}]

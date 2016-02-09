@@ -4,6 +4,19 @@ var app = require('../..');
 import request from 'supertest';
 
 describe('Planes API:', function() {
+  describe('GET /api/planes', function() {
+    it('should list the available planes', function(done) {
+      request(app)
+        .get('/api/planes')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          var planesList = res.body;
+          planesList.elements.length.should.equal(3);
+          done(err);
+        });
+    });
+  });
 
   describe('GET /api/planes/:name', function() {
     it('should contain a list of alive cells', function(done) {

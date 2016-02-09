@@ -29,6 +29,11 @@ function handleError(res, statusCode) {
   };
 }
 
+export function list(req, res) {
+  var planesList = Planes.listAll();
+  respondWithResult(res, 200)({elements: planesList});
+}
+
 export function show(req, res) {
   var name = req.params.name;
   var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;

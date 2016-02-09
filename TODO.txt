@@ -1,8 +1,6 @@
 - task e2e is missing something and we have to use `grunt protractor`
-- add some more planes, and list them dynamically with an API
-- can we add more checks to jshint?
 - explore the Grunt build to see if we're missing something
-- permalink someway in the URL?
 - cache in memory the generations
 - cache in the db the generations
 - evaluate https://github.com/angular-ui/ui-router
+-- permalink someway in the URL?

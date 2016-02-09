@@ -10,7 +10,7 @@
     <div class="col-lg-12">
       <h1 class="page-header">Planes</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6">
-        <li><a href="/planes/a-block-and-bar" tooltip="A rotating bar and a fixed block">A block and a bar</a></li>
+        <li ng-repeat="plane in planes"><a href="/planes/{{ plane.name }}" tooltip="{{ plane.description }}">{{ plane.title }}</a></li>
       </ul>
     </div>
   </div>

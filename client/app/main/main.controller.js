@@ -2,11 +2,12 @@
 
 (function() {
 
-class MainController {
-
-}
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('MainController', MainController);
+  .controller('MainController', function(planesRepository, $scope) {
+    planesRepository.listPlanes().then(function(response) {
+      $scope.planes = response.data.elements;
+    });
+  });
 
 })();
