@@ -4,7 +4,6 @@
 var Rules = require('./rules.model');
 
 describe("Rules", function() {
-  
   it("should kill solitary cells", function() {
     Rules.nextState(true, 0).should.equal(false);
     Rules.nextState(true, 1).should.equal(false);

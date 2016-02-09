@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Service: planesRepository', function () {
+describe('Service: planesRepository', function() {
 
   beforeEach(module('gameOfLifeJavascriptApp'));
 
   var planesRepository, $httpBackend;
 
-  beforeEach(inject(function (_planesRepository_, _$httpBackend_) {
+  beforeEach(inject(function(_planesRepository_, _$httpBackend_) {
     planesRepository = _planesRepository_;
     $httpBackend = _$httpBackend_;
   }));
@@ -16,7 +16,7 @@ describe('Service: planesRepository', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should load the list of planes', function () {
+  it('should load the list of planes', function() {
     var spy = jasmine.createSpy();
     $httpBackend.expect('GET', '/api/planes').respond({
       elements: [
@@ -31,7 +31,7 @@ describe('Service: planesRepository', function () {
     $httpBackend.flush();
   });
 
-  it('should load the generation alive cells', function () {
+  it('should load the generation alive cells', function() {
     var spy = jasmine.createSpy();
     $httpBackend.expect('GET', '/api/planes/a-block-and-bar/generation/3').respond({
       aliveCells: [{x: 1, y: 2}]

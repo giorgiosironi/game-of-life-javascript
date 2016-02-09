@@ -30,14 +30,14 @@ Cell.prototype.signature = function() {
 Cell.prototype.neighbors = function() {
   return new Set([
     // TODO: remove duplication
-    Cell.fromXAndY(this.x-1, this.y-1),
-    Cell.fromXAndY(this.x-1, this.y),
-    Cell.fromXAndY(this.x-1, this.y+1),
-    Cell.fromXAndY(this.x, this.y+1),
-    Cell.fromXAndY(this.x+1, this.y+1),
-    Cell.fromXAndY(this.x+1, this.y),
-    Cell.fromXAndY(this.x+1, this.y-1),
-    Cell.fromXAndY(this.x, this.y-1),
+    Cell.fromXAndY(this.x - 1, this.y - 1),
+    Cell.fromXAndY(this.x - 1, this.y),
+    Cell.fromXAndY(this.x - 1, this.y + 1),
+    Cell.fromXAndY(this.x, this.y + 1),
+    Cell.fromXAndY(this.x + 1, this.y + 1),
+    Cell.fromXAndY(this.x + 1, this.y),
+    Cell.fromXAndY(this.x + 1, this.y - 1),
+    Cell.fromXAndY(this.x, this.y - 1)
   ]);
 };
 Cell.prototype.zone = function() {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .config(function ($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
       .when('/planes/:name', {
         templateUrl: 'app/planes/plane.html',

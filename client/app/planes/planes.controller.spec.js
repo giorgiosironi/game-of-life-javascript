@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Controller: PlanesCtrl', function () {
+describe('Controller: PlanesCtrl', function() {
 
   beforeEach(module('gameOfLifeJavascriptApp'));
 
   var $rootScope, PlanesCtrl, $scope, planesRepository;
 
-  beforeEach(inject(function ($controller, _$rootScope_, _$routeParams_, $q) {
+  beforeEach(inject(function($controller, _$rootScope_, _$routeParams_, $q) {
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
     planesRepository = {
@@ -27,7 +27,7 @@ describe('Controller: PlanesCtrl', function () {
     });
   }));
 
-  it('should load generation 0 for the requested plane', function () {
+  it('should load generation 0 for the requested plane', function() {
     expect($scope.knobs.generationIndex).toBe(0);
     $scope.updateGeneration();
     $rootScope.$apply();

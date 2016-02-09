@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: cell', function () {
+describe('Directive: cell', function() {
 
   // load the directive's module
   beforeEach(module('gameOfLifeJavascriptApp'));
@@ -8,11 +8,11 @@ describe('Directive: cell', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope) {
+  beforeEach(inject(function($rootScope) {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('should make hidden element visible', inject(function($compile) {
     element = angular.element('<td cell cell-x="1" cell-y="2"></td>');
     element = $compile(element)(scope)[0];
     // TODO: extract the correct element without [0]

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('PlanesCtrl', function ($scope, $routeParams, planesRepository, knobs) {
+  .controller('PlanesCtrl', function($scope, $routeParams, planesRepository, knobs) {
     var range = function(start, length) {
       var result = [];
       for (var i = start; i < start + length; i++) {
@@ -13,7 +13,10 @@ angular.module('gameOfLifeJavascriptApp')
     $scope.name = $routeParams.name;
     $scope.knobs = knobs;
     let updateGeneration = function() {
-      planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
+      planesRepository.findByName(
+        $scope.name,
+        $scope.knobs.generationIndex
+      ).then(function(response) {
         $scope.plane = response.data;
         $scope.plane.size = {};
         $scope.plane.size.x = {};

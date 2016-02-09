@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .service('planesRepository', function ($http) {
+  .service('planesRepository', function($http) {
     // TODO: deal with 500
     this.listPlanes = function() {
       return $http.get('/api/planes');
