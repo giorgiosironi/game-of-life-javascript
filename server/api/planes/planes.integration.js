@@ -12,7 +12,11 @@ describe('Planes API:', function() {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           var planesList = res.body;
-          planesList.elements.length.should.equal(3);
+          planesList.elements.length.should.equal(4);
+          for (let plane of planesList.elements) {
+            expect(plane.name).to.exist;
+            expect(plane.title).to.exist;
+          }
           done(err);
         });
     });
