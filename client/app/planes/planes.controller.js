@@ -1,17 +1,7 @@
 'use strict';
 
-var Knobs = function(generationIndex) {
-  this.generationIndex = generationIndex;
-};
-Knobs.prototype.decreaseGeneration = function() {
-  this.generationIndex--;
-};
-Knobs.prototype.increaseGeneration = function() {
-  this.generationIndex++;
-};
-
 angular.module('gameOfLifeJavascriptApp')
-  .controller('PlanesCtrl', function ($scope, $routeParams, planesRepository) {
+  .controller('PlanesCtrl', function ($scope, $routeParams, planesRepository, knobs) {
     var range = function(start, length) {
       var result = [];
       for (var i = start; i < start + length; i++) {
@@ -22,7 +12,7 @@ angular.module('gameOfLifeJavascriptApp')
 
     $scope.message = 'Hello';
     $scope.name = $routeParams.name;
-    $scope.knobs = new Knobs(0);
+    $scope.knobs = knobs;
     // TODO: try let to see Babel at work?
     var updateGeneration = function() {
       planesRepository.findByName($scope.name, $scope.knobs.generationIndex).then(function(response) {
