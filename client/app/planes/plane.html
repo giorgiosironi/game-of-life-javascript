@@ -8,8 +8,11 @@
   <tr ng-repeat="x in plane.size.x.range">
     <td
       ng-repeat="y in plane.size.y.range"
-      ng-class="plane.alive(x, y) ? 'alive' : 'dead'">
-      &nbsp;
+      ng-class="plane.alive(x, y) ? 'alive' : 'dead'"
+      cell
+      cell-x="{{ x }}"
+      cell-y="{{ y }}"
+      >
     </td>
   </tr>
 </table>
