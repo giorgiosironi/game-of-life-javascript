@@ -13,7 +13,7 @@ describe('Planes API:', function() {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           var plane = res.body;
-          plane.aliveCells.length.should.equal(3);
+          plane.aliveCells.length.should.equal(3 + 4);
           done(err);
         });
     });
@@ -25,7 +25,7 @@ describe('Planes API:', function() {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           var plane = res.body;
-          plane.aliveCells.length.should.equal(3);
+          plane.aliveCells.length.should.equal(3 + 4);
           done(err);
         });
     });

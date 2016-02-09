@@ -2,8 +2,8 @@
 <div>This is the planes view.</div>
 <h2 class="generation">Generation: <span class="index">{{ knobs.generationIndex }}</span></h2>
 <!-- TODO: should not be clickable in case generation is 0 -->
-<button class="knobs_prev" ng-click="knobs.decreaseGeneration()" value="<<" />
-<button class="knobs_next" ng-click="knobs.increaseGeneration()" value=">>" />
+<button class="knobs_prev" ng-click="knobs.decreaseGeneration()">&lt;&lt;</button>
+<button class="knobs_next" ng-click="knobs.increaseGeneration()">&gt;&gt;</button>
 <table class="plane">
   <tr ng-repeat="x in plane.size.x.range">
     <td

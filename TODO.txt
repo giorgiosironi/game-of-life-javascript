@@ -1,4 +1,4 @@
-- populate correctly the a-block-and-bar plane
+- task e2e is missing something and we have to use `grunt protractor`
 - add some more planes, and list them dynamically with an API
 - tests with Karma for service and controller
 - Extract Class: Knobs,

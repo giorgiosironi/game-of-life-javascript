@@ -42,6 +42,13 @@ Generation.prototype.evolve = function() {
   }
   return new Generation(nextGeneration);
 };
+Generation.prototype.merge = function(another) {
+  var union = new Set(this.aliveCells);
+  for (let cell of another.aliveCells) {
+    union.add(cell);
+  }
+  return new Generation(union);
+};
 
 var horizontalBar = new Generation([
   Cell.fromXAndY(2, 2),
@@ -53,6 +60,19 @@ var verticalBar = new Generation([
   Cell.fromXAndY(2, 3),
   Cell.fromXAndY(3, 3)
 ]);
+var block = new Generation([
+  Cell.fromXAndY(6, 6),
+  Cell.fromXAndY(6, 7),
+  Cell.fromXAndY(7, 6),
+  Cell.fromXAndY(7, 7)
+]);
+var aBlockAndBar = block.merge(verticalBar);
+var all = {
+  'vertical-bar': verticalBar,
+  'horizontal-bar': horizontalBar,
+  'block': block,
+  'a-block-and-bar': aBlockAndBar
+};
 var Planes = {
   verticalBar: function() {
     return verticalBar;
@@ -61,7 +81,7 @@ var Planes = {
     return horizontalBar;
   },
   findByName: function(name, generationIndex) {
-    var generation = verticalBar;
+    var generation = all[name];
     for (var i = 1; i <= generationIndex; i++) {
       generation = generation.evolve();
     }
