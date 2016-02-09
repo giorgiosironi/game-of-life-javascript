@@ -12,12 +12,13 @@ describe('Plane', function() {
 
   it('should show a generation', function() {
     expect(page.title.getText()).toBe('Plane: a-block-and-bar');
-    page.next();
-    // TODO: better way to get to the next page? Maybe we should only check that we have reached it
-    browser.wait(function() {
-      return element(by.css('.generation .index')).getText(function(text) {
-        return text == 1;
-      });
-    });
   });
+
+  it('should transition between generations on demand', function() {
+    page.next();
+    page.waitForCurrentShownGeneration(1);
+    page.prev();
+    page.waitForCurrentShownGeneration(0);
+  });
+
 });
