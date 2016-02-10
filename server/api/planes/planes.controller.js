@@ -61,5 +61,7 @@ export function create(req, res) {
   promise.then(function() {
     // TODO: respond with a body? Yes because it contains the _id?
     respondWithResult(res, 201)({});
+  }, function() {
+    respondWithResult(res, 500)({});
   });
 }
