@@ -75,54 +75,55 @@ var all = {
   'block': block,
   'a-block-and-bar': aBlockAndBar
 };
-var Planes = {
-  verticalBar: function() {
-    return verticalBar;
+var Planes = function(collection) {
+  this.collection = collection;
+};
+Planes.prototype.verticalBar = function() {
+  return verticalBar;
+};
+Planes.prototype. horizontalBar = function() {
+  return horizontalBar;
+};
+Planes.prototype.listAll = function() {
+  return [
+  {
+    name: 'vertical-bar',
+      title: 'Vertical Bar',
+      description: 'A vertical bar that rotates to a horizontal one'
   },
-  horizontalBar: function() {
-    return horizontalBar;
+  {
+    name: 'horizontal-bar',
+    title: 'Horizontal Bar',
+    description: 'An horizontal bar that rotates to a vertical one'
   },
-  listAll: function() {
-    return [
-      {
-        name: 'vertical-bar',
-        title: 'Vertical Bar',
-        description: 'A vertical bar that rotates to a horizontal one'
-      },
-      {
-        name: 'horizontal-bar',
-        title: 'Horizontal Bar',
-        description: 'An horizontal bar that rotates to a vertical one'
-      },
-      {
-        name: 'block',
-        title: 'Block',
-        description: 'A block that stays fixed'
-      },
-      {
-        name: 'a-block-and-bar',
-        title: 'A block and bar',
-        description: 'A block and a bar, one stays fixed and the other rotates'
-      }
-    ];
+  {
+    name: 'block',
+    title: 'Block',
+    description: 'A block that stays fixed'
   },
-  findByName: function(name, generationIndex) {
-    var generation = all[name];
-    for (let i = 1; i <= generationIndex; i++) {
-      generation = generation.evolve();
-    }
-    return generation;
-  },
-  create: function(plane) {
-    var url = 'mongodb://localhost/gameoflifejavascript-dev';
-    return co(function*() {
-      var db = yield MongoClient.connect(url);
-      var collection = db.collection('planes');
-      var write = yield collection.save(plane);
-      assert.equal(1, write.result.ok);
-      db.close();
-    });
+  {
+    name: 'a-block-and-bar',
+    title: 'A block and bar',
+    description: 'A block and a bar, one stays fixed and the other rotates'
   }
+  ];
+};
+Planes.prototype.findByName = function(name, generationIndex) {
+  var generation = all[name];
+  for (let i = 1; i <= generationIndex; i++) {
+    generation = generation.evolve();
+  }
+  return generation;
+};
+Planes.prototype.create = function(plane) {
+  var url = 'mongodb://localhost/gameoflifejavascript-dev';
+  var collection = this.collection;
+  return co(function*() {
+    var write = yield collection.save(plane);
+    assert.equal(1, write.result.ok);
+  });
 };
 
+// TODO: export Generation for better focused tests
+// and decoupling from the db
 export default Planes;

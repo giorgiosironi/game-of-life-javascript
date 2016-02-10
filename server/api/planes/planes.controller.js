@@ -30,14 +30,14 @@ function handleError(res, statusCode) {
 }
 
 export function list(req, res) {
-  var planesList = Planes.listAll();
+  var planesList = (new Planes()).listAll();
   respondWithResult(res, 200)({elements: planesList});
 }
 
 export function show(req, res) {
   var name = req.params.name;
   var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;
-  var plane = Planes.findByName(name, generationIndex);
+  var plane = (new Planes()).findByName(name, generationIndex);
   respondWithResult(res, 200)(plane);
   /*
   Planes.findByIdAsync(req.params.name)
@@ -56,7 +56,8 @@ export function create(req, res) {
     },
     req.body
   );
-  var promise = Planes.create(plane);
+  var planes = (new Planes(req.db.collection('planes')));
+  var promise = planes.create(plane);
   promise.then(function() {
     // TODO: respond with a body? Yes because it contains the _id?
     respondWithResult(res, 201)({});

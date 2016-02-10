@@ -5,8 +5,9 @@ var Cell = require('./cell.model');
 
 describe('Planes evolution throughout the generations', function() {
   it('should rotate a bar in the next generation', function() {
-    var verticalBar = Planes.verticalBar();
-    var horizontalBar = Planes.horizontalBar();
+    var planes = new Planes(null);
+    var verticalBar = planes.verticalBar();
+    var horizontalBar = planes.horizontalBar();
     verticalBar.evolve().should.deep.equal(horizontalBar);
   });
 });
