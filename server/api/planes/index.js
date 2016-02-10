@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.list);
 router.get('/:name', controller.show);
+router.put('/:name', controller.create);
 router.get('/:name/generation/:index', controller.show);
 
 module.exports = router;

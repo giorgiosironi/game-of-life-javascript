@@ -1,4 +1,3 @@
-- cache in memory the generations
 - cache in the db the generations
 -- so to experiment with MongoDB, promises and yield
 - evaluate https://github.com/angular-ui/ui-router

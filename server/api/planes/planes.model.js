@@ -110,6 +110,8 @@ var Planes = {
       generation = generation.evolve();
     }
     return generation;
+  },
+  create: function(plane) {
   }
 };
 

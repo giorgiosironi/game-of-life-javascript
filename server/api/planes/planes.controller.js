@@ -47,3 +47,15 @@ export function show(req, res) {
     */
 }
 
+export function create(req, res) {
+  var plane = {};
+  Object.assign(
+    plane,
+    {
+      name: req.params.name
+    },
+    req.body
+  );
+  var promise = Planes.create(plane);
+  respondWithResult(res, 201)({});
+}

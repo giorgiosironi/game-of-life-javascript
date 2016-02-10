@@ -48,4 +48,25 @@ describe('Planes API:', function() {
     });
   });
 
+  describe('PUT /api/planes/:name', function() {
+    it('should create a new plane', function(done) {
+      request(app)
+        .put('/api/planes/glider')
+        .send({
+          aliveCells: [
+            {x: 3, y: 1},
+            {x: 3, y: 2},
+            {x: 3, y: 3},
+            {x: 2, y: 3},
+            {x: 1, y: 2},
+          ]
+        })
+        .expect(201)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          done(err);
+        });
+    });
+  });
+
 });

@@ -35,6 +35,7 @@ export default function(app) {
   // Persist sessions with mongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an
   // oauth 1.0 strategy, and Lusca depends on sessions
+  // TODO: disable sessions, I don't want this crap to write on the db implicitly
   app.use(session({
     secret: config.secrets.session,
     saveUninitialized: true,
@@ -44,25 +45,6 @@ export default function(app) {
       db: 'game-of-life-javascript'
     })
   }));
-
-  /**
-   * Lusca - express server security
-   * https://github.com/krakenjs/lusca
-   */
-  if ('test' !== env) {
-    app.use(lusca({
-      csrf: {
-        angular: true
-      },
-      xframe: 'SAMEORIGIN',
-      hsts: {
-        maxAge: 31536000, //1 year, in seconds
-        includeSubDomains: true,
-        preload: true
-      },
-      xssProtection: true
-    }));
-  }
 
   app.set('appPath', path.join(config.root, 'client'));
 
