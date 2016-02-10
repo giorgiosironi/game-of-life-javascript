@@ -64,7 +64,15 @@ describe('Planes API:', function() {
         .expect(201)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          done(err);
+          request(app)
+            .get('/api/planes')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              var planesList = res.body;
+              planesList.elements.map((p) => { return p.name; }).should.contain('glider');
+              done(err);
+            });
         });
     });
   });

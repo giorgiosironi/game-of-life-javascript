@@ -39,12 +39,6 @@ export function show(req, res) {
   var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;
   var plane = (new Planes()).findByName(name, generationIndex);
   respondWithResult(res, 200)(plane);
-  /*
-  Planes.findByIdAsync(req.params.name)
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-    */
 }
 
 export function create(req, res) {

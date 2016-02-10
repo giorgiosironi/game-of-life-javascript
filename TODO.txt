@@ -1,4 +1,10 @@
-- cache in the db the generations
+- let the user add new planes
 -- so to experiment with MongoDB, promises and yield
+++ API for adding a plane
+-- API should retrieve the planes from the db and only if not there fall back to the defaults
+-- plane should be listed
+-- plane should be visitable on generation 0
+-- plane further generations should be calculable
+
 - evaluate https://github.com/angular-ui/ui-router
 -- permalink someway in the URL?
