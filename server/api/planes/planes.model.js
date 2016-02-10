@@ -116,9 +116,16 @@ Planes.prototype.listAll = function() {
 Planes.prototype.findByName = function(name, generationIndex) {
   var collection = this.collection;
   return co(function*() {
-    var generation = yield collection.findOne({name:name});
+    var d = yield collection.findOne({name:name});
+    var generation;
+    // TODO: test all this in integration
+    // TODO: extract map into Generation and Cell
     if (generation === null) {
       generation = all[name];
+    } else {
+      generation = new Generation(d.aliveCells.map(function(c) {
+        return Cell.fromXAndY(c.x, c.y);
+      }));
     }
     for (let i = 1; i <= generationIndex; i++) {
       generation = generation.evolve();

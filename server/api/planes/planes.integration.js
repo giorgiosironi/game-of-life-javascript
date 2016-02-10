@@ -65,6 +65,8 @@ describe('Planes API:', function() {
       request(app)
         .put('/api/planes/glider')
         .send({
+          title: "Glider",
+          description: "Glider moving around",
           aliveCells: [
             {x: 3, y: 1},
             {x: 3, y: 2},
