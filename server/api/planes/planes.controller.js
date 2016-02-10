@@ -29,8 +29,12 @@ function handleError(res, statusCode) {
   };
 }
 
+function planes(req) {
+  return new Planes(req.db.collection('planes'));
+}
+
 export function list(req, res) {
-  var planesList = (new Planes(req.db.collection('planes'))).listAll().then(function(planesList) {
+  var planesList = planes(req).listAll().then(function(planesList) {
     respondWithResult(res, 200)({elements: planesList});
   }, function(err) {
     console.log(err);
@@ -41,7 +45,7 @@ export function list(req, res) {
 export function show(req, res) {
   var name = req.params.name;
   var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;
-  var plane = (new Planes()).findByName(name, generationIndex);
+  var plane = planes(req).findByName(name, generationIndex);
   respondWithResult(res, 200)(plane);
 }
 
@@ -54,8 +58,7 @@ export function create(req, res) {
     },
     req.body
   );
-  var planes = (new Planes(req.db.collection('planes')));
-  var promise = planes.create(plane);
+  var promise = planes(req).create(plane);
   promise.then(function() {
     // TODO: respond with a body? Yes because it contains the _id?
     respondWithResult(res, 201)({});
