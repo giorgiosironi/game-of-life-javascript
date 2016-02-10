@@ -57,5 +57,8 @@ export function create(req, res) {
     req.body
   );
   var promise = Planes.create(plane);
-  respondWithResult(res, 201)({});
+  promise.then(function() {
+    // TODO: respond with a body? Yes because it contains the _id?
+    respondWithResult(res, 201)({});
+  });
 }
