@@ -114,11 +114,17 @@ Planes.prototype.listAll = function() {
   });
 };
 Planes.prototype.findByName = function(name, generationIndex) {
-  var generation = all[name];
-  for (let i = 1; i <= generationIndex; i++) {
-    generation = generation.evolve();
-  }
-  return generation;
+  var collection = this.collection;
+  return co(function*() {
+    var generation = yield collection.findOne({name:name});
+    if (generation === null) {
+      generation = all[name];
+    }
+    for (let i = 1; i <= generationIndex; i++) {
+      generation = generation.evolve();
+    }
+    return generation;
+  });
 };
 Planes.prototype.create = function(plane) {
   var collection = this.collection;

@@ -45,8 +45,12 @@ export function list(req, res) {
 export function show(req, res) {
   var name = req.params.name;
   var generationIndex = (typeof req.params.index === "undefined") ? 0 : req.params.index;
-  var plane = planes(req).findByName(name, generationIndex);
-  respondWithResult(res, 200)(plane);
+  var plane = planes(req).findByName(name, generationIndex).then(function(plane) {
+    respondWithResult(res, 200)(plane);
+  }, function(err) {
+    // TODO: use extracted function handleError
+    console.log(err);
+  });
 }
 
 export function create(req, res) {

@@ -76,6 +76,7 @@ describe('Planes API:', function() {
         .expect(201)
         .expect('Content-Type', /json/)
         .end((err, res) => {
+          // TODO: extract because I think the first err is not checked
           request(app)
             .get('/api/planes')
             .expect(200)
