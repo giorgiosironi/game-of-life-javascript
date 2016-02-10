@@ -2,6 +2,7 @@
 
 var Cell = require('./cell.model');
 var Rules = require('./rules.model');
+var MongoClient = require('mongodb').MongoClient;
 
 /**
  * aliveCells can be a Set or Array of Cell instances
@@ -112,6 +113,11 @@ var Planes = {
     return generation;
   },
   create: function(plane) {
+    var url = 'mongodb://localhost/gameoflifejavascript-dev';
+    MongoClient.connect(url, function(err, db) {
+      console.log(db);
+      db.close();
+    });
   }
 };
 
