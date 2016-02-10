@@ -85,28 +85,33 @@ Planes.prototype. horizontalBar = function() {
   return horizontalBar;
 };
 Planes.prototype.listAll = function() {
-  return [
-  {
-    name: 'vertical-bar',
+  var defaults = [
+    {
+      name: 'vertical-bar',
       title: 'Vertical Bar',
       description: 'A vertical bar that rotates to a horizontal one'
-  },
-  {
-    name: 'horizontal-bar',
-    title: 'Horizontal Bar',
-    description: 'An horizontal bar that rotates to a vertical one'
-  },
-  {
-    name: 'block',
-    title: 'Block',
-    description: 'A block that stays fixed'
-  },
-  {
-    name: 'a-block-and-bar',
-    title: 'A block and bar',
-    description: 'A block and a bar, one stays fixed and the other rotates'
-  }
+    },
+    {
+      name: 'horizontal-bar',
+      title: 'Horizontal Bar',
+      description: 'An horizontal bar that rotates to a vertical one'
+    },
+    {
+      name: 'block',
+      title: 'Block',
+      description: 'A block that stays fixed'
+    },
+    {
+      name: 'a-block-and-bar',
+      title: 'A block and bar',
+      description: 'A block and a bar, one stays fixed and the other rotates'
+    }
   ];
+  var collection = this.collection;
+  return co(function*() {
+    var planes = yield collection.find({}).toArray();
+    return defaults.concat(planes);
+  });
 };
 Planes.prototype.findByName = function(name, generationIndex) {
   var generation = all[name];

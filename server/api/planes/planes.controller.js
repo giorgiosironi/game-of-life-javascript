@@ -30,8 +30,12 @@ function handleError(res, statusCode) {
 }
 
 export function list(req, res) {
-  var planesList = (new Planes()).listAll();
-  respondWithResult(res, 200)({elements: planesList});
+  var planesList = (new Planes(req.db.collection('planes'))).listAll().then(function(planesList) {
+    respondWithResult(res, 200)({elements: planesList});
+  }, function(err) {
+    console.log(err);
+    respondWithResult(res, 500)(err);
+  });
 }
 
 export function show(req, res) {
