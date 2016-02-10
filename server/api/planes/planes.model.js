@@ -116,11 +116,17 @@ Planes.prototype.findByName = function(name, generationIndex) {
   return generation;
 };
 Planes.prototype.create = function(plane) {
-  var url = 'mongodb://localhost/gameoflifejavascript-dev';
   var collection = this.collection;
   return co(function*() {
     var write = yield collection.save(plane);
     assert.equal(1, write.result.ok);
+  });
+};
+Planes.prototype.clean = function() {
+  var collection = this.collection;
+  return co(function*() {
+    var operation = yield collection.deleteMany({});
+    assert.equal(1, operation.result.ok);
   });
 };
 

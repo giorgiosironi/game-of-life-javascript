@@ -2,8 +2,20 @@
 
 var app = require('../..');
 import request from 'supertest';
+import Planes from './planes.model';
+var MongoClient = require('mongodb').MongoClient;
+import co from 'co';
 
 describe('Planes API:', function() {
+  beforeEach(function(done) {
+    co(function*() {
+      var db = yield MongoClient.connect('mongodb://localhost/gameoflifejavascript-dev');
+      var planes = new Planes(db.collection('planes'));
+      yield planes.clean();
+      done();
+    });
+  });
+
   describe('GET /api/planes', function() {
     it('should list the available planes', function(done) {
       request(app)
