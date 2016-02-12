@@ -6,5 +6,9 @@ angular.module('gameOfLifeJavascriptApp')
       .when('/planes/:name', {
         templateUrl: 'app/planes/plane.html',
         controller: 'PlanesCtrl'
+      })
+      .when('/new-plane', {
+        templateUrl: 'app/planes/new-plane.html',
+        controller: 'NewPlaneCtrl'
       });
   });
