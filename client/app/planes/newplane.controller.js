@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('NewPlaneCtrl', function($scope, dimensionRanges, Plane, planesRepository) {
+  .controller('NewPlaneCtrl', function($scope, $location, dimensionRanges, Plane, planesRepository) {
     $scope.dimensionRanges = dimensionRanges;
     $scope.plane = new Plane();
     $scope.toggle = function(x, y) {
@@ -15,6 +15,8 @@ angular.module('gameOfLifeJavascriptApp')
       planesRepository.create(
         $scope.plane.name,
         $scope.plane.state()
-      );
+      ).then(function() {
+        $location.url('/planes/' + $scope.plane.name);
+      });
     };
   });
