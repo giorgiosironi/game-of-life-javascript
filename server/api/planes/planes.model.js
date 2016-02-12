@@ -4,6 +4,7 @@ var Cell = require('./cell.model');
 var Rules = require('./rules.model');
 var MongoClient = require('mongodb').MongoClient;
 var co = require('co');
+var assert = require('assert');
 
 /**
  * aliveCells can be a Set or Array of Cell instances
@@ -116,14 +117,13 @@ Planes.prototype.listAll = function() {
 Planes.prototype.findByName = function(name, generationIndex) {
   var collection = this.collection;
   return co(function*() {
-    var d = yield collection.findOne({name:name});
-    var generation;
+    var generation = yield collection.findOne({name:name});
     // TODO: test all this in integration
     // TODO: extract map into Generation and Cell
     if (generation === null) {
       generation = all[name];
     } else {
-      generation = new Generation(d.aliveCells.map(function(c) {
+      generation = new Generation(generation.aliveCells.map(function(c) {
         return Cell.fromXAndY(c.x, c.y);
       }));
     }
@@ -138,7 +138,7 @@ Planes.prototype.create = function(plane) {
   return co(function*() {
     var write = yield collection.save(plane);
     assert.equal(1, write.result.ok);
-  });
+  }).catch(function(error) { console.log(error); });
 };
 Planes.prototype.clean = function() {
   var collection = this.collection;

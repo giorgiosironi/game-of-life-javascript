@@ -67,6 +67,7 @@ export function create(req, res) {
     // TODO: respond with a body? Yes because it contains the _id?
     respondWithResult(res, 201)({});
   }, function() {
+    console.log(err);
     respondWithResult(res, 500)({});
   });
 }
