@@ -47,16 +47,32 @@ describe('Planes API:', function() {
         });
     });
 
-    it('should load a specific generation', function(done) {
+    it('should answer not found when the plane does not exist', function(done) {
       request(app)
-        .get('/api/planes/a-block-and-bar/generation/1')
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .end((err, res) => {
-          var plane = res.body;
-          plane.aliveCells.length.should.equal(3 + 4);
-          done(err);
-        });
+        .get('/api/planes/some-invented-name')
+        .expect(404)
+        .end(done);
+    });
+
+    describe("/generation", function() {
+      it('should load a specific generation', function(done) {
+        request(app)
+          .get('/api/planes/a-block-and-bar/generation/1')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            var plane = res.body;
+            plane.aliveCells.length.should.equal(3 + 4);
+            done(err);
+          });
+      });
+
+      it('should still answer not found when further generations are requested for a plane that does not exist', function(done) {
+        request(app)
+          .get('/api/planes/some-invented-name/generation/4')
+          .expect(404)
+          .end(done);
+      });
     });
   });
 

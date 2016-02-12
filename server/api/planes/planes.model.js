@@ -127,6 +127,9 @@ Planes.prototype.findByName = function(name, generationIndex) {
         return Cell.fromXAndY(c.x, c.y);
       }));
     }
+    if (!generation) {
+      return null;
+    }
     for (let i = 1; i <= generationIndex; i++) {
       generation = generation.evolve();
     }
@@ -138,7 +141,7 @@ Planes.prototype.create = function(plane) {
   return co(function*() {
     var write = yield collection.save(plane);
     assert.equal(1, write.result.ok);
-  }).catch(function(error) { console.log(error); });
+  });
 };
 Planes.prototype.clean = function() {
   var collection = this.collection;
