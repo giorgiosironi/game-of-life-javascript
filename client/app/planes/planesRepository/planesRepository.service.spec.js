@@ -39,4 +39,14 @@ describe('Service: planesRepository', function() {
     planesRepository.findByName('a-block-and-bar', 3).then(spy);
     $httpBackend.flush();
   });
+
+  it('should create a new plane', function() {
+    var spy = jasmine.createSpy();
+    $httpBackend.expect('POST', '/api/planes').respond({
+      name: "my-plane",
+      aliveCells: [{x: 1, y: 2}]
+    });
+    planesRepository.create({name: "my-plane", aliveCells: [{x: 1, y: 2}]}).then(spy);
+    $httpBackend.flush();
+  });
 });
