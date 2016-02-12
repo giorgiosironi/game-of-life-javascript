@@ -3,16 +3,16 @@
 // TODO: IIFE?
 // TODO: maybe Generation is a better name?
 var Plane = function() {
-  this.name = "";
-  this.title = "";
-  this.description = "";
+  this.name = '';
+  this.title = '';
+  this.description = '';
   this.aliveCells = [];
 };
 var indexOf = function(aliveCells, x, y) {
   // TODO: if you use let...of here "cannot find Symbol" error of ES6 compilation appears
   for (var i in aliveCells) {
     var cell = aliveCells[i];
-    if (cell.x == x && cell.y == y) {
+    if (cell.x === x && cell.y === y) {
       return i;
     }
   }

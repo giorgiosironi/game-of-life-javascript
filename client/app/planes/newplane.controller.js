@@ -9,12 +9,12 @@ angular.module('gameOfLifeJavascriptApp')
     };
     $scope.alive = function(x, y) {
       return $scope.plane.alive(x, y);
-    }
+    };
     $scope.create = function() {
       // TODO: better name, maybe plane and we should rename the existing Plane instance
       planesRepository.create(
         $scope.plane.name,
         $scope.plane.state()
       );
-    }
+    };
   });
