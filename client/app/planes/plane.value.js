@@ -1,7 +1,11 @@
 'use strict';
 
 // TODO: IIFE?
+// TODO: maybe Generation is a better name?
 var Plane = function() {
+  this.name = "";
+  this.title = "";
+  this.description = "";
   this.aliveCells = [];
 };
 var indexOf = function(aliveCells, x, y) {
@@ -24,6 +28,13 @@ Plane.prototype.toggle = function(x, y) {
 };
 Plane.prototype.alive = function(x, y) {
   return indexOf(this.aliveCells, x, y) > -1;
+};
+Plane.prototype.state = function() {
+  return {
+    title: this.title,
+    description: this.description,
+    aliveCells: this.aliveCells
+  };
 };
 
 

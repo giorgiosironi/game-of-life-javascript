@@ -42,11 +42,10 @@ describe('Service: planesRepository', function() {
 
   it('should create a new plane', function() {
     var spy = jasmine.createSpy();
-    $httpBackend.expect('POST', '/api/planes').respond({
-      name: "my-plane",
+    $httpBackend.expect('PUT', '/api/planes/my-plane').respond({
       aliveCells: [{x: 1, y: 2}]
     });
-    planesRepository.create({name: "my-plane", aliveCells: [{x: 1, y: 2}]}).then(spy);
+    planesRepository.create('my-plane', {aliveCells: [{x: 1, y: 2}]}).then(spy);
     $httpBackend.flush();
   });
 });

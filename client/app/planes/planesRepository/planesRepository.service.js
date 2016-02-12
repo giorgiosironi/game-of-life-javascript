@@ -9,7 +9,7 @@ angular.module('gameOfLifeJavascriptApp')
     this.findByName = function(name, generationIndex) {
       return $http.get('/api/planes/' + name + '/generation/' + generationIndex);
     };
-    this.create = function(plane) {
-      return $http.post('/api/planes', plane);
+    this.create = function(name, state) {
+      return $http.put('/api/planes/' + name, state);
     };
   });

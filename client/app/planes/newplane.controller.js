@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('NewPlaneCtrl', function($scope, dimensionRanges, Plane) {
+  .controller('NewPlaneCtrl', function($scope, dimensionRanges, Plane, planesRepository) {
     $scope.dimensionRanges = dimensionRanges;
-    var plane = new Plane();
+    $scope.plane = new Plane();
     $scope.toggle = function(x, y) {
-      plane.toggle(x, y);
+      $scope.plane.toggle(x, y);
     };
     $scope.alive = function(x, y) {
-      return plane.alive(x, y);
+      return $scope.plane.alive(x, y);
+    }
+    $scope.create = function() {
+      // TODO: better name, maybe plane and we should rename the existing Plane instance
+      planesRepository.create(
+        $scope.plane.name,
+        $scope.plane.state()
+      );
     }
   });
