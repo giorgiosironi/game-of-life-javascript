@@ -13,9 +13,7 @@ describe('Controller: PlanesCtrl', function() {
       findByName: function() {
         return $q(function(resolve) {
           resolve({
-            data: {
-              aliveCells: [{x: 0, y: 1}]
-            }
+            aliveCells: [{x: 0, y: 1}]
           });
         });
       }

@@ -9,8 +9,8 @@ angular.module('gameOfLifeJavascriptApp')
       planesRepository.findByName(
         $scope.name,
         $scope.knobs.generationIndex
-      ).then(function(response) {
-        $scope.plane = response.data;
+      ).then(function(plane) {
+        $scope.plane = plane;
         // TODO: maybe all this shouldn't be related to the plane, since
         // it pollutes the server response
         $scope.plane.size = {};

@@ -22,13 +22,14 @@ describe('Service: planesRepository', function() {
       elements: [
         {
           name: 'vertical-bar',
-          title: 'Vertical Bar',
-          description: 'A vertical bar that rotates to an horizontal one and back'
         }
       ]
     });
     planesRepository.listPlanes().then(spy);
     $httpBackend.flush();
+    expect(spy).toHaveBeenCalledWith([{
+      name: 'vertical-bar',
+    }]);
   });
 
   it('should load the generation alive cells', function() {
@@ -38,6 +39,7 @@ describe('Service: planesRepository', function() {
     });
     planesRepository.findByName('a-block-and-bar', 3).then(spy);
     $httpBackend.flush();
+    expect(spy).toHaveBeenCalledWith({ aliveCells: [{x: 1, y: 2}] });
   });
 
   it('should create a new plane', function() {
