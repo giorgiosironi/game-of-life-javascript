@@ -1,6 +1,6 @@
 Immediate:
-- more tests on Plane model
-- one aggregation framework operation
+- one aggregation framework operation: API with the average number of cells and other statistics
+- use import/export and ES6 throughout the server and its tests
 
 Future:
 - how to do CPU intensive tasks?

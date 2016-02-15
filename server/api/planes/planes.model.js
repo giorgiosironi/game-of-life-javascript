@@ -145,7 +145,8 @@ Planes.prototype.create = function(plane) {
   };
   return co(function*() {
     ensureNotADefault(plane.name);
-    var write = yield collection.save(plane);
+    var write = yield collection.insert(plane);
+    console.log(write.result);
     assert.equal(1, write.result.ok);
   }).catch(function(err) {
     switch (err.code) {
