@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('NewPlaneCtrl', function($scope, $location, dimensionRanges, Plane, planesRepository) {
+  .controller('NewPlaneCtrl', function($scope, $location, Flash, dimensionRanges, Plane, planesRepository) {
     $scope.dimensionRanges = dimensionRanges;
     $scope.plane = new Plane();
     $scope.toggle = function(x, y) {
@@ -10,13 +10,17 @@ angular.module('gameOfLifeJavascriptApp')
     $scope.alive = function(x, y) {
       return $scope.plane.alive(x, y);
     };
-    $scope.create = function() {
+    $scope.create = function(form) {
+      if (form.$valid) {
       // TODO: better name, maybe plane and we should rename the existing Plane instance
-      planesRepository.create(
-        $scope.plane.name,
-        $scope.plane.state()
-      ).then(function() {
-        $location.url('/planes/' + $scope.plane.name);
-      });
+        planesRepository.create(
+          $scope.plane.name,
+          $scope.plane.state()
+        ).then(function() {
+          $location.url('/planes/' + $scope.plane.name);
+        });
+      } else {
+        Flash.create('danger', "Please check the form for errors");
+      }
     };
   });

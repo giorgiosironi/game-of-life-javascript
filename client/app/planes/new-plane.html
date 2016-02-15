@@ -1,7 +1,34 @@
-<form ng-submit="create()">
-  <h1>Plane: <input type="text" ng-model="plane.name" placeholder="my-custom-plane" /></h1>
+<form name="planeForm" ng-submit="create(planeForm)">
+  <h1>Plane: 
+    <input type="text" 
+      name="name"
+      placeholder="my-custom-plane" 
+      ng-model="plane.name"
+      required 
+      ng-minlength="3" 
+      ng-pattern="/^[a-z0-9-]*$/"
+      ng-class="{ 'has-error': planeForm.name.$touched && planeForm.name.$invalid }"
+      /></h1>
+    <div ng-messages="planeForm.name.$error" ng-show="planeForm.name.$touched">
+      <p ng-message="required">A plane unique identifier is mandatory</p>
+      <p ng-message="minlength">Identify the plane with at least 3 characters</p>
+      <p ng-message="pattern">Only use lowercase letters, numbers and hyphens</p>
+    </div>
   <!-- TODO: check out bootstrap markup for forms -->
-  <p>Title: <input type="text" ng-model="plane.title" placeholder="My custom plane!" /></p>
+  <p>Title:
+    <input type="text"
+      name="title"
+      placeholder="My custom plane!"
+      ng-model="plane.title"
+      required
+      ng-minlength="3" 
+      ng-class="{ 'has-error': planeForm.title.$touched && planeForm.title.$invalid }"
+    />
+    <div ng-messages="planeForm.title.$error" ng-show="planeForm.title.$touched">
+      <p ng-message="required">The plane title is mandatory</p>
+      <p ng-message="minlength">List the plane with at least 3 characters</p>
+    </div>
+  </p>
   <p>Description: <input type="text" ng-model="plane.description" placeholder="Will show a glider moving eastward..." /></p>
   <table class="plane">
     <tr ng-repeat="x in dimensionRanges.x">
