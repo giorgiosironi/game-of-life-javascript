@@ -1,14 +1,14 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./planes.controller');
+import express from 'express';
+import {list, statistics, show, create} from './planes.controller';
 
 var router = express.Router();
 
-router.get('/', controller.list);
-router.get('/statistics', controller.statistics);
-router.get('/:name', controller.show);
-router.put('/:name', controller.create);
-router.get('/:name/generation/:index', controller.show);
+router.get('/', list);
+router.get('/statistics', statistics);
+router.get('/:name', show);
+router.put('/:name', create);
+router.get('/:name/generation/:index', show);
 
 module.exports = router;

@@ -1,8 +1,8 @@
 'use strict';
 
-var Planes = require('./planes.model');
-var Cell = require('./cell.model');
-var MongoClient = require('mongodb').MongoClient;
+import Planes from './planes.model';
+import Cell from './cell.model';
+import MongoClient from 'mongodb';
 import co from 'co';
 
 describe('Planes evolution throughout the generations', function() {

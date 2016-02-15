@@ -1,10 +1,9 @@
 'use strict';
 
-var Cell = require('./cell.model');
-var Rules = require('./rules.model');
-var co = require('co');
-var assert = require('assert');
-import MongoError from 'mongodb';
+import Cell from './cell.model';
+import Rules from './rules.model';
+import co from 'co';
+import assert from 'assert';
 
 /**
  * aliveCells can be a Set or Array of Cell instances

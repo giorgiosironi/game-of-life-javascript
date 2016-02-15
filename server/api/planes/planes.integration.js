@@ -1,9 +1,9 @@
 'use strict';
 
-var app = require('../..');
+import app from '../..';
 import request from 'supertest';
 import Planes from './planes.model';
-var MongoClient = require('mongodb').MongoClient;
+import MongoClient from 'mongodb';
 import co from 'co';
 
 describe('Planes API:', function() {

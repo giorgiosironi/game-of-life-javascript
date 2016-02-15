@@ -1,7 +1,6 @@
 'use strict';
 
-// TODO: uniform to import
-var Rules = require('./rules.model');
+import Rules from './rules.model';
 
 describe("Rules", function() {
   it("should kill solitary cells", function() {

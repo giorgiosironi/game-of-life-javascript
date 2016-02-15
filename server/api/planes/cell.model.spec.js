@@ -1,6 +1,6 @@
 'use strict';
 
-var Cell = require('./cell.model');
+import Cell from './cell.model';
 
 describe('Cell', function() {
   it('should generate the list of its neighbors', function() {
