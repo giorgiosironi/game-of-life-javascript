@@ -146,7 +146,6 @@ Planes.prototype.create = function(plane) {
   return co(function*() {
     ensureNotADefault(plane.name);
     var write = yield collection.insert(plane);
-    console.log(write.result);
     assert.equal(1, write.result.ok);
   }).catch(function(err) {
     switch (err.code) {
@@ -154,6 +153,33 @@ Planes.prototype.create = function(plane) {
         throw new Error('plane-already-exists');
       default:
         throw err;
+    }
+  });
+};
+Planes.prototype.statistics = function() {
+  var collection = this.collection;
+  return co(function*() {
+    var pipeline = [
+      {
+        $project: {
+          cells: { $size: "$aliveCells" }
+        }
+      },
+      {
+        $group: { 
+          _id: 1,
+          average: { $avg: "$cells" },
+          minimum: { $min: "$cells" },
+          maximum: { $max: "$cells" }
+        }
+      }
+    ];
+    var result = yield collection.aggregate(pipeline).next();
+    if (result === null) {
+      return {};
+    } else {
+      delete result._id;
+      return { cells: result };
     }
   });
 };

@@ -7,10 +7,12 @@ var MongoClient = require('mongodb').MongoClient;
 import co from 'co';
 
 describe('Planes API:', function() {
+  var planes;
+
   beforeEach(function(done) {
     co(function*() {
       var db = yield MongoClient.connect('mongodb://localhost/gameoflifejavascript-dev');
-      var planes = new Planes(db.collection('planes'));
+      planes = new Planes(db.collection('planes'));
       yield planes.clean();
       done();
     });
@@ -33,6 +35,26 @@ describe('Planes API:', function() {
         });
     });
   });
+
+  describe('GET /api/planes/statistics', function() {
+    it('should show statistics on the custom planes', function(done) {
+      planes.create({name: 'my-plane', aliveCells: [{x: 0, y: 0}]})
+        .then(function() {
+          request(app)
+            .get('/api/planes/statistics')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              var planesList = res.body;
+              expect(planesList.cells).to.be.defined;
+              expect(planesList.cells.average).to.be.a('number');
+              expect(planesList.cells.minimum).to.be.a('number');
+              expect(planesList.cells.maximum).to.be.a('number');
+              done(err);
+            });
+        });
+      });
+    });
 
   describe('GET /api/planes/:name', function() {
     it('should contain a list of alive cells', function(done) {
@@ -108,7 +130,7 @@ describe('Planes API:', function() {
         });
     });
 
-    it.only('should refuse overwriting an existing plane', function(done) {
+    it('should refuse overwriting an existing plane', function(done) {
       var planeData = {
         title: "Glider",
         aliveCells: []

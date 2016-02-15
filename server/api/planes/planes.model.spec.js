@@ -7,6 +7,13 @@ import co from 'co';
 
 describe('Planes evolution throughout the generations', function() {
   var planes;
+  var someCells = function(number) {
+    var cells = [];
+    for (let i = 0; i < number; i++) {
+      cells.push({x: i, y: 0});
+    }
+    return cells;
+  };
 
   beforeEach(function(done) {
     co(function*() {
@@ -42,5 +49,21 @@ describe('Planes evolution throughout the generations', function() {
       .then(function() {
         return expect(planes.create(plane)).to.be.rejectedWith(Error);
       });
+  });
+
+  it('should aggregate statistics on the custom planes', function() {
+    return Promise.all([
+      planes.create({name: 'my-plane', title: 'My plane', aliveCells: someCells(4)}),
+      planes.create({name: 'another-plane', title: 'Another plane', aliveCells: someCells(10)})
+    ]).then(function() {
+      return expect(planes.statistics()).to.eventually.deep.equal({
+        cells: {
+          average: 7,
+          minimum: 4,
+          maximum: 10
+        }
+      });
+    });
+
   });
 });

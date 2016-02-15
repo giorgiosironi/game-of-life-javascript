@@ -84,3 +84,13 @@ export function create(req, res, next) {
     }, handleError(res))
     .catch(next);
 }
+
+export function statistics(req, res, next) {
+  planes(req)
+    .statistics()
+    .then(
+      respondWithResult(res, 200),
+      handleError(res)
+    )
+    .catch(next);
+}
