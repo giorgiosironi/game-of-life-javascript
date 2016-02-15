@@ -11,7 +11,8 @@
     "angular-sanitize": "~1.4.0",
     "angular-route": "~1.4.0",
     "font-awesome": ">=4.1.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "angular-flash-alert": "master"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

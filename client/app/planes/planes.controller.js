@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gameOfLifeJavascriptApp')
-  .controller('PlanesCtrl', function($scope, $routeParams, planesRepository, knobs, dimensionRanges) {
+  .controller('PlanesCtrl', function($scope, $routeParams, Flash, planesRepository, knobs, dimensionRanges) {
 
     $scope.name = $routeParams.name;
     $scope.knobs = knobs;
@@ -29,7 +29,7 @@ angular.module('gameOfLifeJavascriptApp')
           return false;
         };
       }, function(err) {
-        console.error(err);
+        Flash.create('danger', err.message);
       });
     };
     $scope.updateGeneration = updateGeneration;

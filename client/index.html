@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -33,6 +34,9 @@
 
     <!-- Add your site or application content here -->
     <navbar></navbar>
+    <div class="messages-console">
+      <flash-message duration="0" show-close="true"></flash-message>
+    </div>
     <div class="view" ng-view=""></div>
     <footer></footer>
 
@@ -50,6 +54,7 @@
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/angular-route/angular-route.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->

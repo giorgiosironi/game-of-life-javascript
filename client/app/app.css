@@ -41,3 +41,8 @@
 div.view {
   text-align: center;
 }
+
+div.messages-console {
+  width: 600px;
+  margin: auto;
+}

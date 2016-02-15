@@ -5,7 +5,8 @@ angular.module('gameOfLifeJavascriptApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngFlash'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider
