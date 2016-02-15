@@ -8,6 +8,7 @@ Immediate:
 --- do not show the grid
 -- e.g. 400 on plane creation
 --- show validation errors to the user
+- one aggregation framework operation
 
 Future:
 - how to do CPU intensive tasks?

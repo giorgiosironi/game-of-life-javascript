@@ -13,6 +13,14 @@ angular.module('gameOfLifeJavascriptApp')
       return $http.get('/api/planes/' + name + '/generation/' + generationIndex)
         .then(function(response) {
           return response.data;
+        })
+        .catch(function(err) {
+          switch (err.status) {
+            case 404:
+              throw new Error('Plane not found');
+            default:
+              throw new Error('Plane could not be retrieved, retry later');
+          }
         });
     };
     this.create = function(name, state) {
