@@ -1,6 +1,3 @@
-Immediate:
-- use import/export and ES6 throughout the server and its tests
-
 Future:
 - how to do CPU intensive tasks?
 - cache generations

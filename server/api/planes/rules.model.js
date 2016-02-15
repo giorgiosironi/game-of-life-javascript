@@ -1,7 +1,6 @@
 'use strict';
 
-// TODO: change to lowercase 'rules'
-var Rules = {
+var rules = {
   nextState: function(currentState, aliveNeighbors) {
     if (aliveNeighbors === 3) {
       return true;
@@ -13,5 +12,5 @@ var Rules = {
   }
 };
 
-export default Rules;
+export default rules;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import Cell from './cell.model';
-import Rules from './rules.model';
+import rules from './rules.model';
 import co from 'co';
 import assert from 'assert';
 
@@ -34,7 +34,7 @@ Generation.prototype.evolve = function() {
         aliveNeighbors++;
       }
     }
-    return Rules.nextState(isAlive, aliveNeighbors);
+    return rules.nextState(isAlive, aliveNeighbors);
   };
   var nextGeneration = new Set();
   for (let cell of candidates()) {
