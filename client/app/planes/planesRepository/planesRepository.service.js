@@ -24,6 +24,15 @@ angular.module('gameOfLifeJavascriptApp')
         });
     };
     this.create = function(name, state) {
-      return $http.put('/api/planes/' + name, state);
+      return $http.put('/api/planes/' + name, state)
+        .catch(function(err) {
+          console.log(err);
+          switch (err.status) {
+            case 400:
+              throw new Error(err.data.message);
+            default:
+              throw new Error('Plane could not be created, retry later');
+          }
+        });
     };
   });

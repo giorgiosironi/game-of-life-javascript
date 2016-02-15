@@ -2,9 +2,9 @@
 
 var Cell = require('./cell.model');
 var Rules = require('./rules.model');
-var MongoClient = require('mongodb').MongoClient;
 var co = require('co');
 var assert = require('assert');
+import MongoError from 'mongodb';
 
 /**
  * aliveCells can be a Set or Array of Cell instances
@@ -138,9 +138,22 @@ Planes.prototype.findByName = function(name, generationIndex) {
 };
 Planes.prototype.create = function(plane) {
   var collection = this.collection;
+  var ensureNotADefault = (name) => {
+    if (typeof all[name] !== 'undefined') {
+      throw new Error('plane-already-exists');
+    }
+  };
   return co(function*() {
+    ensureNotADefault(plane.name);
     var write = yield collection.save(plane);
     assert.equal(1, write.result.ok);
+  }).catch(function(err) {
+    switch (err.code) {
+      case 11000:
+        throw new Error('plane-already-exists');
+      default:
+        throw err;
+    }
   });
 };
 Planes.prototype.clean = function() {

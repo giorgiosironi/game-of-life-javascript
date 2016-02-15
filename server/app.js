@@ -9,6 +9,8 @@ import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
+import co from 'co';
+import MongoClient from 'mongodb';
 import expressMongoDb from 'express-mongo-db';
 
 // Connect to MongoDB
@@ -24,19 +26,34 @@ if (config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 // TODO: parameterize database name and maybe host
-app.use(expressMongoDb('mongodb://localhost/gameoflifejavascript-dev'));
+var databaseUrl = 'mongodb://localhost/gameoflifejavascript-dev';
+app.use(expressMongoDb(databaseUrl));
 var server = http.createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
+var indexesCreation = co(function*() {
+  console.log("Indexes creation");
+  var db = yield MongoClient.connect(databaseUrl);
+  var planes = db.collection('planes');
+  var indexName = yield planes.ensureIndex({name: 1}, {unique: true});
+  console.log("Ensured index " + indexName);
+});
+
 // Start server
-function startServer() {
+function listen() {
   app.angularFullstack = server.listen(config.port, config.ip, function() {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
 }
 
-setImmediate(startServer);
+function startServer() {
+  listen();
+}
+
+setImmediate(function() {
+  indexesCreation.then(startServer);
+});
 
 // Expose app
 exports = module.exports = app;

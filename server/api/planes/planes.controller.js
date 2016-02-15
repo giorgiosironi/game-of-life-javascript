@@ -24,11 +24,19 @@ function handleEntityNotFound(res) {
   };
 }
 
+var mapOfErrors = {
+  "plane-already-exists": 400
+};
+
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    console.error(err);
-    res.status(statusCode).send(err);
+    if (mapOfErrors[err.message]) {
+      res.status(mapOfErrors[err.message]).send({message: err.message});
+    } else {
+      console.error(err);
+      res.status(statusCode).send(err);
+    }
   };
 }
 

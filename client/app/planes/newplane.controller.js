@@ -18,9 +18,11 @@ angular.module('gameOfLifeJavascriptApp')
           $scope.plane.state()
         ).then(function() {
           $location.url('/planes/' + $scope.plane.name);
+        }, function(err) {
+          Flash.create('danger', 'Could not create the plane: ' + err.message);
         });
       } else {
-        Flash.create('danger', "Please check the form for errors");
+        Flash.create('danger', 'Please check the form for errors');
       }
     };
   });

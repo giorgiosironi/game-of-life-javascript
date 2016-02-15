@@ -106,6 +106,27 @@ describe('Planes API:', function() {
             });
         });
     });
+
+    it.only('should refuse overwriting an existing plane', function(done) {
+      var planeData = {
+        title: "Glider",
+        aliveCells: []
+      };
+      request(app)
+        .put('/api/planes/glider')
+        .send(planeData)
+        .expect(201)
+        .end((err, res) => {
+          request(app)
+            .put('/api/planes/glider')
+            .send(planeData)
+            .expect(400)
+            .end((err, res) => {
+              //res.data.message.should.be('Plane already exists');
+              done(err);
+            });
+        });
+    });
   });
 
 });
