@@ -80,7 +80,6 @@ export function create(req, res, next) {
   planes(req)
     .create(plane)
     .then(function() {
-      // TODO: respond with a body? Yes because it contains the _id?
       respondWithResult(res, 201)({});
     }, handleError(res))
     .catch(next);

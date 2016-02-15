@@ -24,7 +24,7 @@ describe('Planes API:', function() {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           var planesList = res.body;
-          planesList.elements.length.should.equal(4);
+          expect(planesList.elements.length).to.equal(4);
           for (let plane of planesList.elements) {
             expect(plane.name).to.exist;
             expect(plane.title).to.exist;
@@ -42,7 +42,7 @@ describe('Planes API:', function() {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           var plane = res.body;
-          plane.aliveCells.length.should.equal(3 + 4);
+          expect(plane.aliveCells.length).to.equal(3 + 4);
           done(err);
         });
     });
@@ -62,7 +62,7 @@ describe('Planes API:', function() {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             var plane = res.body;
-            plane.aliveCells.length.should.equal(3 + 4);
+            expect(plane.aliveCells.length).to.equal(3 + 4);
             done(err);
           });
       });
@@ -101,7 +101,8 @@ describe('Planes API:', function() {
             .expect('Content-Type', /json/)
             .end((err, res) => {
               var planesList = res.body;
-              planesList.elements.map((p) => { return p.name; }).should.contain('glider');
+              expect(planesList.elements.map((p) => { return p.name; }))
+                .to.contain('glider');
               done(err);
             });
         });
@@ -122,7 +123,7 @@ describe('Planes API:', function() {
             .send(planeData)
             .expect(400)
             .end((err, res) => {
-              //res.data.message.should.be('Plane already exists');
+              expect(res.body.message).to.equal('plane-already-exists');
               done(err);
             });
         });

@@ -8,6 +8,6 @@ describe('Planes evolution throughout the generations', function() {
     var planes = new Planes(null);
     var verticalBar = planes.verticalBar();
     var horizontalBar = planes.horizontalBar();
-    verticalBar.evolve().should.deep.equal(horizontalBar);
+    expect(verticalBar.evolve()).to.deep.equal(horizontalBar);
   });
 });

@@ -9,8 +9,8 @@ describe('Cell', function() {
     neighbors.size.should.equal(8);
     for (let i in neighbors) {
       var neighbor = neighbors[i];
-      origin.manhattanDistance(neighbor).should.be.least(1);
-      origin.manhattanDistance(neighbor).should.be.most(2);
+      expect(origin.manhattanDistance(neighbor)).to.be.at.least(1);
+      expect(origin.manhattanDistance(neighbor)).to.be.at.most(2);
     }
   });
 
@@ -20,8 +20,8 @@ describe('Cell', function() {
     neighbors.size.should.equal(9);
     for (let i in neighbors) {
       var neighbor = neighbors[i];
-      origin.manhattanDistance(neighbor).should.be.least(0);
-      origin.manhattanDistance(neighbor).should.be.most(2);
+      expect(origin.manhattanDistance(neighbor)).to.be.at.least(0);
+      expect(origin.manhattanDistance(neighbor)).to.be.at.most(2);
     }
   });
 });

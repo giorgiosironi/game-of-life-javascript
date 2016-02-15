@@ -1,15 +1,6 @@
 Immediate:
-+ let the user add new planes
-- deal with missing plane 404 on /planes/not-existing
-- error management on the server and on the client
-- validation on server write and on client form
-- angular $http: add catch() in service to throw custom exception
--- add a unique index
--- use insert and check its result
--- e.g. 400 on plane creation
--- deal with the 400 by showing a Flash error message with the text passed back by the response
+- more tests on Plane model
 - one aggregation framework operation
-- try to use expect() instead of should in Mocha tests
 
 Future:
 - how to do CPU intensive tasks?
